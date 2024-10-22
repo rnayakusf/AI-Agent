@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot Home</title>
+    <link rel="stylesheet" href="indexstyle.css">
+    <!-- roboto font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="main">
+        <h1>What is the Chatbot?</h1>
+        <p>Type your message in the input box and submit. The chat box will display messages between you and the bot.</p>
+    </div>
+    <div id="form-container">
+        <form id="participant-form" action="/chat">
+            <label for="participantID">Enter your participant ID:</label>
+            <input type="text" id="participantID" name="participantID" required>
+            <button type="submit">Start Chat</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('participant-form').addEventListener('submit', (event) => {
+            const participantID = document.getElementById('participantID').value
+            localStorage.setItem('participantID', participantID)
+            document.location.href = "/chat.html"
+        })
+    </script>
+</body>
+</html>
