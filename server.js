@@ -44,22 +44,6 @@ app.post('/chat', async (req, res) => {
 
   console.log(`Message: ${message}`);
   try {
-    // search results
-    const bingResponse = await axios.get('https://api.bing.microsoft.com/v7.0/search', {
-      params: { q: message }, // Use the user's input as the search query
-      headers: {
-        'Ocp-Apim-Subscription-Key': process.env.BING_API_KEY
-      }
-    });
-
-    console.log(bingResponse);
-
-    const searchResults = bingResponse.data.webPages.value.slice(0, 3).map(result => ({
-      title: result.name,
-      url: result.url,
-      snippet: result.snippet
-    }));
-
     const messages = history.length === 0
       ? [{ role: 'system', content: 'You are a helpful assistant.' }, {
         role: 'user', content: message }]
@@ -82,7 +66,7 @@ app.post('/chat', async (req, res) => {
     });
     await interaction.save();
 
-    res.json({ message, response: botResponse, searchResults });
+    res.json({ message, response: botResponse });
   } catch (error) {
     console.error('Error:', error.message);
     res.status(500).send('Server Error');
